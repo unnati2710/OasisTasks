@@ -1,0 +1,154 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    
+    <style>
+        input[type="number"] {
+            width: 100px;
+            padding: 5px;
+        }
+        body {
+    font-family: Arial, sans-serif;
+    margin: 1;
+    padding: 100;
+    align-items: center;
+    height: 100vh;
+    background-color: #f98d78;
+}
+
+.container {
+    max-width: 40px;
+    padding: 20px;
+    background-color: #f8cd25;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="number"], select {
+    width: 10%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 10%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #032b55;
+}
+
+#result {
+    width:50%;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #070707;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+    </style>
+</head>
+<body>
+    <h1 align="center">Temperature Converter</h1>
+    <p>
+        A temperature converter helps in the conversion of the measurement units of the temperature recorded in a particular unit. Temperature expresses the degree of heat or cold of a solid, liquid, or gas. Temperature is measured using a thermometer.
+        While Kelvin (K) is the SI unit of temperature, people generally use Centigrade or Celsius (°C) and Fahrenheit (°F) to measure temperature.
+        We use temperature converter to find the different readings of a given temperature on different unit measuring scales. 
+        A temperature converter helps convert the temperature between Fahrenheit, Kelvin and Celsius scale. 
+    </p>
+    <label for="inputUnit">From:</label>
+    <select id="inputUnit">
+        <option value="celsius">Celsius</option>
+        <option value="fahrenheit">Fahrenheit</option>
+        <option value="kelvin">Kelvin</option>
+    </select>
+
+    <label for="outputUnit">To:</label>
+    <select id="outputUnit">
+        <option value="celsius">Celsius</option>
+        <option value="fahrenheit">Fahrenheit</option>
+        <option value="kelvin">Kelvin</option>
+    </select>
+    <br><br>
+    <label for="temperature">Temperature:</label>
+    <input type="number" id="temperature" placeholder="Enter temperature" required>
+    <button onclick="convertTemperature()">Convert</button>
+
+    <div id="result"></div>
+
+    <script>
+        function convertTemperature() {
+            var temperature = parseFloat(document.getElementById("temperature").value);
+            var inputUnit = document.getElementById("inputUnit").value;
+            var outputUnit = document.getElementById("outputUnit").value;
+            var result = document.getElementById("result");
+
+            if (isNaN(temperature)) {
+                result.textContent = "Please enter a valid number for temperature.";
+                return;
+            }
+
+            var convertedTemperature;
+
+            if (inputUnit === "celsius") {
+                if (outputUnit === "fahrenheit") {
+                    convertedTemperature = (temperature * 9 / 5) + 32;
+                } else if (outputUnit === "kelvin") {
+                    convertedTemperature = temperature + 273.15;
+                } else {
+                    convertedTemperature = temperature;
+                }
+            } else if (inputUnit === "fahrenheit") {
+                if (outputUnit === "celsius") {
+                    convertedTemperature = (temperature - 32) * (5 / 9);
+                } else if (outputUnit === "kelvin") {
+                    convertedTemperature = (temperature - 32) * (5 / 9) + 273.15;
+                } else {
+                    convertedTemperature = temperature;
+                }
+            } else if (inputUnit === "kelvin") {
+                if (outputUnit === "celsius") {
+                    convertedTemperature = temperature - 273.15;
+                } else if (outputUnit === "fahrenheit") {
+                    convertedTemperature = (temperature - 273.15) * 9 / 5 + 32;
+                } else {
+                    convertedTemperature = temperature;
+                }
+            }
+
+            align="center" 
+            result.textContent = "Converted Temperature: " + convertedTemperature.toFixed(2) + " " + outputUnit;
+            
+        }
+    </script>
+    <br>
+    <p>
+        <b><h3>Celsius</h3></b> Celsius scale was Invented in 1742 by Swedish astronomer Anders Celsius and hence named after him. Celsius, also called centigrade, is based on the freezing point of water which is 0°, 
+        and the boiling point of water which is 100° The temperature in celsius is represented with °C. Normal human body temperature is 37°C.
+    </p>
+    <p>
+        <h3><b>Fahrenheit</b></h3>The Fahrenheit scale is a temperature scale developed by Daniel Gabriel Fahrenheit and hence named after him. This scale has the boiling point of water at 212° F 
+        and the freezing point at 32° F. The temperature in Fahrenheit is represented with °F. The normal human body temperature is 98.6°F.
+    </p>
+    <p>
+        <h3><b>Kelvin</b></h3>Kelvin is the SI unit of temperature. The unit symbol is K. It is named after the physicist William Thomson, 1st Baron Kelvin (1824–1907).
+         Here the degree symbol ° is not used to represent the temperature, unlike in Celsius or Fahrenheit.
+    </p>
+</body>
+</html>
